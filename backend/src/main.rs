@@ -1,4 +1,5 @@
-use rocket::serde::{Serialize, Deserialize, json::Json};
+use rocket::{serde::{Serialize, Deserialize, json::Json}};
+use rocket::fs::{FileServer, relative};
 
 #[macro_use] extern crate rocket;
 
@@ -9,12 +10,14 @@ pub struct Project {
 }
 
 
-#[get("/", format = "json")]
-fn index() -> Json<Project> {
+#[get("/project", format = "json")]
+fn get_project() -> Json<Project> {
     Json(Project { id: "abc".to_string(), name: "Reading".to_string() })
 }
 
 #[launch]
 fn rocket() -> _ {
-    rocket::build().mount("/", routes![index])
+    rocket::build()
+        .mount("/", FileServer::from(relative!("static")))
+        .mount("/api", routes![get_project])
 }
