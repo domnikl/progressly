@@ -1,7 +1,7 @@
 FROM rust:1.67-alpine AS backend
-WORKDIR /usr/src/progressly
+WORKDIR /app
 COPY backend .
-RUN apk add libc-dev && cargo build --release
+RUN apk add libc-dev && cargo install --path .
 
 # build frontend
 FROM rust:1.67-alpine AS frontend
@@ -14,8 +14,9 @@ RUN apk add libc-dev \
 
 # build backend
 FROM alpine
-RUN mkdir -p /progressly
 WORKDIR /progressly
-COPY --from=backend /usr/src/progressly/target/release/progressly /progressly/progressly
-COPY --from=frontend /usr/src/progressly/dist /progressly/static
+COPY --from=backend /usr/local/cargo/bin/progressly /usr/local/bin/progressly
+COPY --from=frontend /usr/src/progressly/dist/* /app/static/
+ENV ROCKET_ADDRESS=0.0.0.0
+EXPOSE 8000
 CMD ["progressly"]
