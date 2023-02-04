@@ -1,3 +1,3 @@
-# habit-tracker
+# progressly
 
-a habit-tracker
+a project and habit tracker
