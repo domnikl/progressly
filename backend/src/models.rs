@@ -1,6 +1,7 @@
 use diesel::prelude::*;
 use rocket::serde::{Serialize, Deserialize};
 use uuid::Uuid;
+use crate::schema::projects;
 
 #[derive(Queryable, Serialize, Deserialize)]
 pub struct User {
@@ -8,7 +9,9 @@ pub struct User {
     pub email: String,
 }
 
-#[derive(Queryable, Serialize, Deserialize)]
+#[derive(Queryable, Insertable, Serialize, Deserialize)]
+#[diesel(belongs_to(User))]
+#[diesel(table_name = projects)]
 pub struct Project {
     pub id: Uuid,
     pub name: String,
