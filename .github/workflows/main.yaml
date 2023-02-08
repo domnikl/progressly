@@ -6,15 +6,8 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Build & Test
-        run: docker build -t domnikl/progressly .
-
   push_to_registry:
-    name: Push Docker image to Docker Hub
+    name: Build and push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
