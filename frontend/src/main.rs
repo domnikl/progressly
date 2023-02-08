@@ -1,5 +1,6 @@
 pub mod home;
 pub mod projects;
+pub mod api;
 
 use yew::prelude::*;
 use yew_router::prelude::*;

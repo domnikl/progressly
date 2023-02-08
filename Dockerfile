@@ -1,13 +1,13 @@
 FROM rust:1.67-alpine AS backend
 WORKDIR /app
 COPY backend .
-RUN apk add libc-dev && cargo install --path .
+RUN apk add libc-dev libpq-dev && cargo install --path .
 
 # build frontend
 FROM rust:1.67-alpine AS frontend
 WORKDIR /usr/src/progressly
 COPY frontend .
-RUN apk add libc-dev \
+RUN apk add libc-dev libssl-dev \
     && rustup target add wasm32-unknown-unknown \
     && cargo install trunk \
     && trunk build --release
