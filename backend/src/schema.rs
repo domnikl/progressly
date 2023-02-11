@@ -26,7 +26,7 @@ diesel::table! {
         project_id -> Uuid,
         task_id -> Nullable<Uuid>,
         start -> Timestamptz,
-        end -> Timestamptz,
+        end -> Nullable<Timestamptz>,
     }
 }
 

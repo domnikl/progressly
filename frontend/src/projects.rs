@@ -8,15 +8,17 @@ pub fn Projects() -> Html {
     let projects: UseStateHandle<Vec<Project>> = use_state_eq(|| vec![]);
 
     {
+        // make copies of the state
         let projects = projects.clone();
-        use_effect(|| {
+
+        use_effect_with_deps(move |_| {
             spawn_local(async move {
                 match crate::api::get_projects().await {
                     Err(_e) => {}, // TODO: error handling: show a snackbar
                     Ok(p) => projects.set(p)
                 }
             })
-        });
+        }, ());
     }
 
     html!(
