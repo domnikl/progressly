@@ -21,6 +21,12 @@ pub fn Projects() -> Html {
         }, ());
     }
 
+    let on_start_tracking = {
+        Callback::from(move |e: MouseEvent| {
+            log::info!("{:?}", e);
+        })
+    };
+
     html!(
         <div>
             <h1>{"projects"}</h1>
@@ -37,13 +43,13 @@ pub fn Projects() -> Html {
                                     
                                 //</div>
                                 <div class="mdl-card__actions mdl-card--border">
-                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick={on_start_tracking.clone()}>
                                         {"start"}
                                     </a>
                                 </div>
 
                                 <div class="mdl-card__menu">
-                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick={on_start_tracking.clone()}>
                                         <i class="material-icons">{"play_arrow"}</i>
                                     </button>
                                 </div>

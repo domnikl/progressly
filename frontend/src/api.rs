@@ -1,4 +1,4 @@
-use serde::Deserialize;
+use serde::{Deserialize};
 use gloo::utils::window;
 
 #[derive(Debug, Clone, PartialEq, Deserialize)]
@@ -32,3 +32,13 @@ pub async fn get_projects() -> Result<Vec<Project>, reqwest::Error> {
         Ok(projects) => projects.json::<Vec<Project>>().await
     }
 }
+
+/*pub async fn start_tracking() -> Result<StartTracking, reqwest::Error> {
+    let client = reqwest::Client::new();
+
+    // TODO: post body!
+    let resp = client.post(format!("{}/api/trackings", get_base_url()))
+        .bearer_auth("c79f9e52-86eb-4de6-be78-a7a097b8f516")
+        .send()
+        .await;
+}*/
