@@ -1,7 +1,7 @@
 use yew::prelude::*;
 use yew_router::prelude::*;
 
-use crate::Route;
+use crate::MainRoute;
 
 #[function_component]
 pub fn Home() -> Html {
@@ -11,7 +11,7 @@ pub fn Home() -> Html {
 
             <p>
                 {"Go to "}
-                <Link<Route> to={Route::Projects}>{"projects"}</Link<Route>>
+                <Link<MainRoute> to={MainRoute::Projects}>{"projects"}</Link<MainRoute>>
                 {"."}
             </p>
         </div>

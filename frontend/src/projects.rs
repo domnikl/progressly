@@ -25,17 +25,33 @@ pub fn Projects() -> Html {
         <div>
             <h1>{"projects"}</h1>
 
-            <div>
+            <div class="projects-list">
                 {
                     projects.iter().map(|project| {
-                        html!{<div key={project.clone().name}>{ format!("{}", project.name) }</div>}
+                        html!{
+                            <div class="mdl-card mdl-shadow--2dp">
+                                <div class="mdl-card__title">
+                                    <h2 class="mdl-card__title-text">{ project.clone().name }</h2>
+                                </div>
+                                //<div class="mdl-card__supporting-text">
+                                    
+                                //</div>
+                                <div class="mdl-card__actions mdl-card--border">
+                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                                        {"start"}
+                                    </a>
+                                </div>
+
+                                <div class="mdl-card__menu">
+                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                        <i class="material-icons">{"play_arrow"}</i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
                     }).collect::<Html>()
                 }
             </div>
-
-            <p>
-                {"Here will be your projects"}
-            </p>
         </div>
     )
 }
