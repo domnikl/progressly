@@ -1,10 +1,10 @@
-FROM rust:1.67-alpine AS backend
+FROM rust:1.68-alpine AS backend
 WORKDIR /app
 COPY backend .
 RUN apk add libc-dev libpq-dev && cargo install --path .
 
 # build frontend
-FROM rust:1.67-alpine AS frontend
+FROM rust:1.68-alpine AS frontend
 WORKDIR /usr/src/progressly
 COPY frontend .
 RUN apk add libc-dev openssl-dev \
